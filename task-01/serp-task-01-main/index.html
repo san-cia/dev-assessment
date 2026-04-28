@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SERP Feature Scorer — SEO Competition Analyser</title>
+    <meta name="description" content="Instantly score keyword competition difficulty by detecting SERP features on Google results pages." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #f5f7fa;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --border-focus: #4f46e5;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent: #4f46e5;
+            --accent-light: #eef2ff;
+            --accent2: #6366f1;
+            --green: #059669;
+            --green-light: #ecfdf5;
+            --amber: #d97706;
+            --amber-light: #fffbeb;
+            --orange: #ea580c;
+            --orange-light: #fff7ed;
+            --red: #dc2626;
+            --red-light: #fef2f2;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --mono: 'JetBrains Mono', monospace;
+            --sans: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            min-height: 100vh;
+        }
+
+        /* ── NAV ── */
+        .topnav {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-logo {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nav-logo svg {
+            display: block;
+        }
+
+        .nav-badge {
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            letter-spacing: 0.01em;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%);
+            color: white;
+            padding: 3rem 2rem 2.5rem;
+            text-align: center;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 0.07em;
+            padding: 5px 14px;
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.9rem;
+        }
+
+        .hero p {
+            font-size: 14.5px;
+            line-height: 1.75;
+            opacity: 0.82;
+            max-width: 540px;
+            margin: 0 auto 2rem;
+        }
+
+        .steps-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 12.5px;
+            font-weight: 500;
+        }
+
+        .step-num {
+            width: 22px;
+            height: 22px;
+            background: white;
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .step-arrow {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 20px;
+            padding: 0 5px;
+            font-weight: 300;
+        }
+
+        /* ── LAYOUT ── */
+        .main {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            animation: fadeUp 0.45s ease both;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.10s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: 0.20s;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .card-title-group {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .card-icon.indigo {
+            background: #eef2ff;
+        }
+
+        .card-icon.emerald {
+            background: #ecfdf5;
+        }
+
+        .card-icon.sky {
+            background: #f0f9ff;
+        }
+
+        .card-icon.slate {
+            background: #f8fafc;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* ── FIELD ── */
+        .field-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-bottom: 5px;
+        }
+
+        .step-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            font-size: 10.5px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-badge.sky {
+            background: #0284c7;
+        }
+
+        .step-badge.green {
+            background: var(--green);
+        }
+
+        .field-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            line-height: 1.55;
+        }
+
+        .keyword-input {
+            width: 100%;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 15px;
+            font-family: var(--sans);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .keyword-input:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            background: white;
+        }
+
+        .keyword-input::placeholder {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* ── TIP BOX ── */
+        .tip-box {
+            display: flex;
+            gap: 10px;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: var(--radius-sm);
+            padding: 11px 14px;
+            margin-bottom: 1.25rem;
+            font-size: 12.5px;
+            color: #0c4a6e;
+            line-height: 1.6;
+        }
+
+        .tip-box svg {
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ── FEATURES ── */
+        .features-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .sel-count {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .sel-count span {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .reset-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: var(--sans);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: white;
+            border: 1px solid var(--border);
+            padding: 6px 13px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .reset-btn:hover {
+            background: var(--bg);
+            border-color: #cbd5e1;
+            color: var(--text);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 10px;
+        }
+
+        .feature-card {
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            user-select: none;
+            background: var(--bg);
+        }
+
+        .feature-card:hover {
+            border-color: rgba(79, 70, 229, 0.38);
+            background: #f5f3ff;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .feature-card.active {
+            border-color: var(--accent);
+            background: var(--accent-light);
+            box-shadow: 0 0 0 1px var(--accent);
+        }
+
+        .fc-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .fc-icon-wrap {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.18s;
+        }
+
+        .feature-card.active .fc-icon-wrap {
+            background: rgba(79, 70, 229, 0.15);
+        }
+
+        .fc-check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.18s;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .feature-card.active .fc-check {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .fc-check-svg {
+            display: none;
+        }
+
+        .feature-card.active .fc-check-svg {
+            display: block;
+        }
+
+        .fc-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .fc-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.45;
+            margin-bottom: 9px;
+        }
+
+        .fc-pts-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .fc-pts-badge {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 5px;
+            padding: 2px 8px;
+        }
+
+        .feature-card.active .fc-pts-badge {
+            background: var(--accent);
+            color: white;
+        }
+
+        .fc-pts-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ── SCORE ── */
+        .score-layout {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .score-dial {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-width: 120px;
+        }
+
+        .score-circle {
+            position: relative;
+            width: 118px;
+            height: 118px;
+        }
+
+        .score-svg {
+            width: 118px;
+            height: 118px;
+            transform: rotate(-90deg);
+        }
+
+        .score-track {
+            fill: none;
+            stroke: #e2e8f0;
+            stroke-width: 9;
+        }
+
+        .score-fill {
+            fill: none;
+            stroke: var(--green);
+            stroke-width: 9;
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 0.5s ease, stroke 0.4s ease;
+        }
+
+        .score-val {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-num-big {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--text);
+            transition: color 0.4s;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .score-num-sub {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .score-difficulty {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 11px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            background: #f1f5f9;
+            color: var(--text-muted);
+        }
+
+        .score-right-col {
+            width: 100%;
+        }
+
+        .score-bar-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .score-bar-track {
+            height: 10px;
+            background: var(--bg);
+            border-radius: 999px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: var(--green);
+            width: 0%;
+            transition: width 0.5s ease, background 0.4s;
+        }
+
+        .score-zones {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .zone-chip {
+            font-size: 10.5px;
+            font-weight: 600;
+            padding: 2px 9px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+        }
+
+        .zone-chip.easy {
+            background: var(--green-light);
+            color: var(--green);
+            border-color: #a7f3d0;
+        }
+
+        .zone-chip.mod {
+            background: var(--amber-light);
+            color: var(--amber);
+            border-color: #fde68a;
+        }
+
+        .zone-chip.hard {
+            background: var(--orange-light);
+            color: var(--orange);
+            border-color: #fed7aa;
+        }
+
+        .zone-chip.vhard {
+            background: var(--red-light);
+            color: var(--red);
+            border-color: #fca5a5;
+        }
+
+        .zone-chip.active-chip {
+            outline: 2px solid currentColor;
+            outline-offset: 1px;
+        }
+
+        /* ── BREAKDOWN ── */
+        .breakdown-section {
+            margin-top: 1.25rem;
+        }
+
+        .breakdown-header {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 8px;
+        }
+
+        .breakdown-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 13px;
+            padding: 1.75rem 0;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .breakdown-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .breakdown-table th {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: var(--text-muted);
+            text-align: left;
+            padding: 7px 10px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .breakdown-table th:last-child {
+            text-align: right;
+        }
+
+        .breakdown-table td {
+            padding: 9px 10px;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        .breakdown-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .breakdown-table td:last-child {
+            text-align: right;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .breakdown-table .total-row td {
+            font-weight: 700;
+            background: var(--bg);
+            border-top: 2px solid var(--border);
+            border-bottom: none;
+        }
+
+        .breakdown-table .total-row td:last-child {
+            color: var(--text);
+        }
+
+        .feat-name-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feat-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .feat-icon-cell {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── JSON OUTPUT ── */
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--sans);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            background: var(--accent-light);
+            border: 1px solid rgba(79, 70, 229, 0.22);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .copy-btn:hover {
+            background: #e0e7ff;
+        }
+
+        .copy-btn.copied {
+            color: var(--green);
+            background: var(--green-light);
+            border-color: rgba(5, 150, 105, 0.28);
+        }
+
+        .json-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            padding: 10px 0 12px;
+            line-height: 1.6;
+        }
+
+        .code-ref {
+            font-family: var(--mono);
+            background: #f1f5f9;
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-size: 11.5px;
+            color: var(--text-secondary);
+        }
+
+        .json-box {
+            background: #0f172a;
+            border-radius: var(--radius-sm);
+            padding: 1.25rem;
+            font-family: var(--mono);
+            font-size: 12.5px;
+            line-height: 1.95;
+            color: #94a3b8;
+            white-space: pre;
+            overflow-x: auto;
+            border: 1px solid #1e293b;
+        }
+
+        .json-key {
+            color: #93c5fd;
+        }
+
+        .json-str {
+            color: #86efac;
+        }
+
+        .json-num {
+            color: #fbbf24;
+        }
+
+        .json-true {
+            color: #34d399;
+        }
+
+        .json-false {
+            color: #f87171;
+        }
+
+        .json-null {
+            color: #f87171;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            text-align: center;
+            padding: 1.25rem;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            background: var(--white);
+        }
+
+        /* ── ANIMATION ── */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 2rem 1rem 1.75rem;
+            }
+
+            .step-arrow {
+                display: none;
+            }
+
+            .score-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .score-dial {
+                flex-direction: row;
+                align-items: center;
+                gap: 1.25rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══ NAV ══════════════════════════════════════════════════ -->
+    <nav class="topnav">
+        <a class="nav-brand" href="#">
+            <div class="nav-logo">
+                <!-- Bar chart icon -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                </svg>
+            </div>
+            SERP Feature Scorer
+        </a>
+        <span class="nav-badge">Task 01 — SEO / GEO Assessment</span>
+    </nav>
+
+    <!-- ══ HERO ══════════════════════════════════════════════════ -->
+    <section class="hero">
+        <div class="hero-eyebrow">
+            <!-- Search icon -->
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            SEO Competition Analysis Tool
+        </div>
+        <h1>SERP Feature Scorer</h1>
+        <p>
+            Analyse how competitive a Google search result is. Select the features present on the results page and receive an instant <strong>Competition Score (0 – 100)</strong> with a full breakdown.
+        </p>
+        <div class="steps-row">
+            <div class="step-item"><span class="step-num">1</span> Enter Keyword</div>
+            <div class="step-arrow">&#8250;</div>
+            <div class="step-item"><span class="step-num">2</span> Toggle SERP Features</div>
+            <div class="step-arrow">&#8250;</div>
+            <div class="step-item"><span class="step-num">3</span> Read Score &amp; Export JSON</div>
+        </div>
+    </section>
+
+    <!-- ══ MAIN ══════════════════════════════════════════════════ -->
+    <main class="main">
+
+        <!-- STEP 1 — KEYWORD -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-group">
+                    <div class="card-icon indigo">
+                        <!-- Key icon -->
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="7.5" cy="15.5" r="5.5" />
+                            <path d="M21 2l-9.6 9.6" />
+                            <path d="M15.5 7.5l3 3L22 7l-3-3" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="card-title">Step 1 — Enter Your Keyword</div>
+                        <div class="card-subtitle">The exact Google search term you want to analyse</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="field-label">
+                    <span class="step-badge">1</span>
+                    Search Keyword
+                </div>
+                <div class="field-hint">Type the keyword exactly as you would search it on Google (e.g. <em>best running shoes</em>)</div>
+                <input class="keyword-input" id="keyword" type="text" placeholder="e.g. best running shoes" autocomplete="off" spellcheck="false" aria-label="Search keyword" />
+            </div>
+        </div>
+
+        <!-- STEP 2 — FEATURES -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-group">
+                    <div class="card-icon indigo">
+                        <!-- Layers / toggle icon -->
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                            <polyline points="2 17 12 22 22 17" />
+                            <polyline points="2 12 12 17 22 12" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="card-title">Step 2 — Select SERP Features</div>
+                        <div class="card-subtitle">Click every element you can see on the Google results page</div>
+                    </div>
+                </div>
+                <div class="features-toolbar">
+                    <span class="sel-count">Selected: <span id="sel-count">0</span> / 8</span>
+                    <button class="reset-btn" id="reset-btn" onclick="resetAll()">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="1 4 1 10 7 10" />
+                            <path d="M3.51 15a9 9 0 1 0 .49-4.29" />
+                        </svg>
+                        Reset All
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="tip-box">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <span><strong>How to use:</strong> Open Google and search your keyword. Then click each feature below that appears in the results. Each active feature adds points to the competition score.</span>
+                </div>
+                <div class="features-grid" id="features-grid"></div>
+            </div>
+        </div>
+
+        <!-- STEP 3 — SCORE -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-group">
+                    <div class="card-icon emerald">
+                        <!-- Trending up icon -->
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                            <polyline points="17 6 23 6 23 12" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="card-title">Step 3 — Competition Score</div>
+                        <div class="card-subtitle">Higher score = harder to earn organic clicks from Google</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="score-layout">
+
+                    <!-- Circular dial -->
+                    <div class="score-dial">
+                        <div class="score-circle">
+                            <svg class="score-svg" viewBox="0 0 100 100" aria-hidden="true">
+                                <circle class="score-track" cx="50" cy="50" r="45" />
+                                <circle class="score-fill" id="score-ring" cx="50" cy="50" r="45" />
+                            </svg>
+                            <div class="score-val">
+                                <span class="score-num-big" id="score-num">0</span>
+                                <span class="score-num-sub">/ 100</span>
+                            </div>
+                        </div>
+                        <span class="score-difficulty" id="score-difficulty">No features</span>
+                    </div>
+
+                    <!-- Bar + zones + breakdown -->
+                    <div class="score-right-col">
+                        <div style="margin-bottom:1.25rem;">
+                            <div class="score-bar-labels">
+                                <span>0 — Easy</span>
+                                <span>100 — Very Hard</span>
+                            </div>
+                            <div class="score-bar-track">
+                                <div class="score-bar-fill" id="score-bar"></div>
+                            </div>
+                            <div class="score-zones">
+                                <span class="zone-chip easy" id="zone-easy">0 – 30 &nbsp;Easy</span>
+                                <span class="zone-chip mod" id="zone-mod">31 – 55 &nbsp;Moderate</span>
+                                <span class="zone-chip hard" id="zone-hard">56 – 75 &nbsp;Hard</span>
+                                <span class="zone-chip vhard" id="zone-vhard">76+ &nbsp;Very Hard</span>
+                            </div>
+                        </div>
+
+                        <div class="breakdown-section">
+                            <div class="breakdown-header">Score Breakdown</div>
+                            <div id="breakdown-list">
+                                <div class="breakdown-empty">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="3" width="7" height="7" />
+                                        <rect x="14" y="3" width="7" height="7" />
+                                        <rect x="14" y="14" width="7" height="7" />
+                                        <rect x="3" y="14" width="7" height="7" />
+                                    </svg>
+                                    <span>No features selected yet.<br>Toggle features above to see the breakdown.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JSON OUTPUT -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-group">
+                    <div class="card-icon sky">
+                        <!-- Code icon -->
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6" />
+                            <polyline points="8 6 2 12 8 18" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="card-title">JSON Output</div>
+                        <div class="card-subtitle">Structured result — ready to use in code or share with your team</div>
+                    </div>
+                </div>
+                <button class="copy-btn" id="copy-btn" onclick="copyJSON()">
+                    <!-- Copy icon -->
+                    <svg id="copy-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    <span id="copy-text">Copy JSON</span>
+                </button>
+            </div>
+            <div class="card-body">
+                <p class="json-hint">
+                    This output matches the format returned by <span class="code-ref">scoreSERP()</span> in <span class="code-ref">src/serpScorer.ts</span>.
+                </p>
+                <div class="json-box" id="json-output"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        SERP Feature Scorer &nbsp;&middot;&nbsp; Task 01 — SEO / GEO Assessment &nbsp;&middot;&nbsp; Competition scores are capped at 100
+    </footer>
+
+    <script>
+        /* ── FEATURE DEFINITIONS ─────────────────────────────────── */
+        const FEATURES = {
+            featured_snippet: {
+                w: 25,
+                label: 'Featured Snippet',
+                desc: 'A highlighted answer box shown at the very top of search results',
+                /* Bolt / lightning */
+                svgPath: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>'
+            },
+            people_also_ask: {
+                w: 10,
+                label: 'People Also Ask',
+                desc: 'An accordion of related questions shown below the main results',
+                /* Help circle */
+                svgPath: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>'
+            },
+            local_pack: {
+                w: 30,
+                label: 'Local Pack',
+                desc: 'A map block with 3 local business listings (Google Maps section)',
+                /* Map pin */
+                svgPath: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>'
+            },
+            image_carousel: {
+                w: 10,
+                label: 'Image Carousel',
+                desc: 'A horizontal row of images displayed within the search results',
+                /* Image */
+                svgPath: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>'
+            },
+            video_results: {
+                w: 15,
+                label: 'Video Results',
+                desc: 'Video thumbnails (usually YouTube) embedded in the results page',
+                /* Play circle */
+                svgPath: '<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>'
+            },
+            knowledge_panel: {
+                w: 20,
+                label: 'Knowledge Panel',
+                desc: 'An info box on the right side (Wikipedia-style entity summary)',
+                /* Book open */
+                svgPath: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>'
+            },
+            shopping_ads: {
+                w: 20,
+                label: 'Shopping Ads',
+                desc: 'Product image ads shown at the top or side of the results page',
+                /* Shopping cart */
+                svgPath: '<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>'
+            },
+            sitelinks: {
+                w: 10,
+                label: 'Sitelinks',
+                desc: 'Additional sub-page links shown below the main organic result',
+                /* External link */
+                svgPath: '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>'
+            }
+        }
+
+        const state = {}
+        Object.keys(FEATURES).forEach(k => state[k] = false)
+
+        /* ── BUILD FEATURE CARDS ─────────────────────────────────── */
+        function buildGrid() {
+            const grid = document.getElementById('features-grid')
+            Object.entries(FEATURES).forEach(([key, f]) => {
+                const card = document.createElement('div')
+                card.className = 'feature-card'
+                card.id = 'card-' + key
+                card.setAttribute('role', 'checkbox')
+                card.setAttribute('aria-checked', 'false')
+                card.setAttribute('tabindex', '0')
+                card.setAttribute('aria-label', f.label + ' — ' + f.w + ' points. ' + f.desc)
+                card.innerHTML = `
+      <div class="fc-top">
+        <div class="fc-icon-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${f.svgPath}</svg>
+        </div>
+        <div class="fc-check">
+          <svg class="fc-check-svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="fc-name">${f.label}</div>
+      <div class="fc-desc">${f.desc}</div>
+      <div class="fc-pts-row">
+        <span class="fc-pts-badge">+${f.w}</span>
+        <span class="fc-pts-label">competition points</span>
+      </div>
+    `
+                card.addEventListener('click', () => toggle(key, card))
+                card.addEventListener('keydown', e => {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                        e.preventDefault();
+                        toggle(key, card)
+                    }
+                })
+                grid.appendChild(card)
+            })
+        }
+
+        function toggle(key, card) {
+            state[key] = !state[key]
+            card.classList.toggle('active', state[key])
+            card.setAttribute('aria-checked', String(state[key]))
+            render()
+        }
+
+        /* ── SCORING ─────────────────────────────────────────────── */
+        function getScore() {
+            const raw = Object.keys(state)
+                .filter(k => state[k])
+                .reduce((s, k) => s + FEATURES[k].w, 0)
+            return {
+                raw,
+                score: Math.min(raw, 100)
+            }
+        }
+
+        function getDifficulty(score) {
+            if (score === 0) return {
+                text: 'No features',
+                color: '#94a3b8',
+                zone: null
+            }
+            if (score <= 30) return {
+                text: 'Easy',
+                color: '#059669',
+                zone: 'easy'
+            }
+            if (score <= 55) return {
+                text: 'Moderate',
+                color: '#d97706',
+                zone: 'mod'
+            }
+            if (score <= 75) return {
+                text: 'Hard',
+                color: '#ea580c',
+                zone: 'hard'
+            }
+            return {
+                text: 'Very Hard',
+                color: '#dc2626',
+                zone: 'vhard'
+            }
+        }
+
+        function getBarColor(score) {
+            if (score === 0) return '#e2e8f0'
+            if (score <= 30) return '#059669'
+            if (score <= 55) return '#d97706'
+            if (score <= 75) return '#ea580c'
+            return '#dc2626'
+        }
+
+        /* ── RENDER ──────────────────────────────────────────────── */
+        function render() {
+            const active = Object.keys(state).filter(k => state[k])
+            const {
+                raw,
+                score
+            } = getScore()
+            const diff = getDifficulty(score)
+            const keyword = document.getElementById('keyword').value.trim() || 'your keyword'
+
+            // Score number
+            document.getElementById('score-num').textContent = score
+            document.getElementById('score-num').style.color = diff.color
+            document.getElementById('score-difficulty').textContent = diff.text
+            document.getElementById('score-difficulty').style.color = diff.color
+            document.getElementById('score-difficulty').style.background = diff.zone ? '' : '#f1f5f9'
+
+            // Bar
+            const bar = document.getElementById('score-bar')
+            bar.style.width = score + '%'
+            bar.style.background = getBarColor(score)
+
+            // Circular ring (r=45, circ ≈ 282.7)
+            const circ = 282.7
+            const ring = document.getElementById('score-ring')
+            ring.style.strokeDashoffset = circ - (circ * score / 100)
+            ring.style.stroke = getBarColor(score)
+
+            // Zone chips
+            ;
+            ['easy', 'mod', 'hard', 'vhard'].forEach(z => {
+                document.getElementById('zone-' + z).classList.toggle('active-chip', diff.zone === z)
+            })
+
+            // Selection counter
+            document.getElementById('sel-count').textContent = active.length
+
+            // Breakdown
+            const list = document.getElementById('breakdown-list')
+            if (active.length === 0) {
+                list.innerHTML = `
+      <div class="breakdown-empty">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span>No features selected yet.<br>Toggle features above to see the breakdown.</span>
+      </div>`
+            } else {
+                const rows = active.map(k => `
+      <tr>
+        <td>
+          <div class="feat-name-cell">
+            <div class="feat-dot"></div>
+            ${FEATURES[k].label}
+          </div>
+        </td>
+        <td>
+          <div class="feat-icon-cell">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${FEATURES[k].svgPath}</svg>
+          </div>
+        </td>
+        <td>+${FEATURES[k].w}</td>
+      </tr>`).join('')
+                const capNote = raw > 100 ?
+                    ` <span style="color:#94a3b8;font-weight:400;font-size:11px;">(raw: ${raw} — capped at 100)</span>` :
+                    ''
+                list.innerHTML = `
+      <table class="breakdown-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Type</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td colspan="2">Competition Score</td>
+            <td>${score}${capNote}</td>
+          </tr>
+        </tfoot>
+      </table>`
+            }
+
+            // JSON output
+            const featureWeights = {}
+            active.forEach(k => featureWeights[k] = FEATURES[k].w)
+            const output = {
+                keyword,
+                detected_features: active,
+                feature_weights: featureWeights,
+                competition_score: score
+            }
+            document.getElementById('json-output').innerHTML = syntaxHighlight(JSON.stringify(output, null, 2))
+        }
+
+        /* ── SYNTAX HIGHLIGHT ────────────────────────────────────── */
+        function syntaxHighlight(json) {
+            return json
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/(\"(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*\"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, m => {
+                    if (/^"/.test(m)) return /:$/.test(m) ? `<span class="json-key">${m}</span>` : `<span class="json-str">${m}</span>`
+                    if (/true/.test(m)) return `<span class="json-true">${m}</span>`
+                    if (/false/.test(m)) return `<span class="json-false">${m}</span>`
+                    if (/null/.test(m)) return `<span class="json-null">${m}</span>`
+                    return `<span class="json-num">${m}</span>`
+                })
+        }
+
+        /* ── RESET ───────────────────────────────────────────────── */
+        function resetAll() {
+            Object.keys(state).forEach(k => {
+                state[k] = false
+                const card = document.getElementById('card-' + k)
+                card.classList.remove('active')
+                card.setAttribute('aria-checked', 'false')
+            })
+            render()
+        }
+
+        /* ── COPY JSON ───────────────────────────────────────────── */
+        function copyJSON() {
+            const active = Object.keys(state).filter(k => state[k])
+            const featureWeights = {}
+            active.forEach(k => featureWeights[k] = FEATURES[k].w)
+            const output = {
+                keyword: document.getElementById('keyword').value.trim() || 'your keyword',
+                detected_features: active,
+                feature_weights: featureWeights,
+                competition_score: getScore().score
+            }
+            navigator.clipboard.writeText(JSON.stringify(output, null, 2)).catch(() => {})
+            const btn = document.getElementById('copy-btn')
+            const text = document.getElementById('copy-text')
+            const iconSvg = document.getElementById('copy-icon-svg')
+            btn.classList.add('copied')
+            // Swap copy icon to check icon
+            iconSvg.innerHTML = '<polyline points="20 6 9 17 4 12"/>'
+            text.textContent = 'Copied!'
+            setTimeout(() => {
+                btn.classList.remove('copied')
+                iconSvg.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'
+                text.textContent = 'Copy JSON'
+            }, 2200)
+        }
+
+        /* ── INIT ────────────────────────────────────────────────── */
+        document.getElementById('keyword').addEventListener('input', render)
+        buildGrid()
+        render()
+    </script>
+
+</body>
+
+</html>

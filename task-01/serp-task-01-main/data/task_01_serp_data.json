@@ -1,0 +1,717 @@
+{
+    "_meta": {
+        "task": "01",
+        "title": "SERP Feature Extraction & Structured Scoring",
+        "description": "30 SERP snapshots across a mix of informational, commercial, and navigational queries. Each entry represents a single keyword's SERP at a point in time.",
+        "feature_weights": {
+            "featured_snippet": 25,
+            "people_also_ask": 10,
+            "local_pack": 30,
+            "image_carousel": 10,
+            "video_results": 15,
+            "knowledge_panel": 20,
+            "shopping_ads": 20,
+            "sitelinks": 10
+        },
+        "notes": [
+            "competition_score in expected_output is the correct answer — use it to verify your implementation.",
+            "Some SERPs have no features (score = 0). Some exceed 100 before capping.",
+            "serp_features keys will always be present — values may be true or false."
+        ]
+    },
+    "serps": [{
+            "id": "serp_001",
+            "keyword": "best running shoes",
+            "intent": "commercial",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": true,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": true,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "image_carousel",
+                    "shopping_ads"
+                ],
+                "competition_score": 65
+            }
+        },
+        {
+            "id": "serp_002",
+            "keyword": "nike store near me",
+            "intent": "local",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": false,
+                "local_pack": true,
+                "image_carousel": false,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": true
+            },
+            "expected_output": {
+                "detected_features": [
+                    "local_pack",
+                    "sitelinks"
+                ],
+                "competition_score": 40
+            }
+        },
+        {
+            "id": "serp_003",
+            "keyword": "how to tie a bowline knot",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": true,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "video_results"
+                ],
+                "competition_score": 50
+            }
+        },
+        {
+            "id": "serp_004",
+            "keyword": "apple macbook pro",
+            "intent": "navigational",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": false,
+                "local_pack": false,
+                "image_carousel": true,
+                "video_results": false,
+                "knowledge_panel": true,
+                "shopping_ads": true,
+                "sitelinks": true
+            },
+            "expected_output": {
+                "detected_features": [
+                    "image_carousel",
+                    "knowledge_panel",
+                    "shopping_ads",
+                    "sitelinks"
+                ],
+                "competition_score": 60
+            }
+        },
+        {
+            "id": "serp_005",
+            "keyword": "what is photosynthesis",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": true,
+                "video_results": true,
+                "knowledge_panel": true,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "image_carousel",
+                    "video_results",
+                    "knowledge_panel"
+                ],
+                "competition_score": 80
+            }
+        },
+        {
+            "id": "serp_006",
+            "keyword": "plumber in austin texas",
+            "intent": "local",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": true,
+                "local_pack": true,
+                "image_carousel": false,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "people_also_ask",
+                    "local_pack"
+                ],
+                "competition_score": 40
+            }
+        },
+        {
+            "id": "serp_007",
+            "keyword": "buy noise cancelling headphones",
+            "intent": "transactional",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": true,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": true,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "people_also_ask",
+                    "image_carousel",
+                    "shopping_ads"
+                ],
+                "competition_score": 40
+            }
+        },
+        {
+            "id": "serp_008",
+            "keyword": "eiffel tower",
+            "intent": "navigational",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": true,
+                "video_results": true,
+                "knowledge_panel": true,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "people_also_ask",
+                    "image_carousel",
+                    "video_results",
+                    "knowledge_panel"
+                ],
+                "competition_score": 55
+            }
+        },
+        {
+            "id": "serp_009",
+            "keyword": "python list comprehension tutorial",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": true,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "video_results"
+                ],
+                "competition_score": 50
+            }
+        },
+        {
+            "id": "serp_010",
+            "keyword": "cheap flights to tokyo",
+            "intent": "transactional",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": true,
+                "sitelinks": true
+            },
+            "expected_output": {
+                "detected_features": [
+                    "people_also_ask",
+                    "shopping_ads",
+                    "sitelinks"
+                ],
+                "competition_score": 40
+            }
+        },
+        {
+            "id": "serp_011",
+            "keyword": "best italian restaurant london",
+            "intent": "local",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": true,
+                "local_pack": true,
+                "image_carousel": true,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "people_also_ask",
+                    "local_pack",
+                    "image_carousel"
+                ],
+                "competition_score": 50
+            }
+        },
+        {
+            "id": "serp_012",
+            "keyword": "ibuprofen side effects",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": false,
+                "knowledge_panel": true,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "knowledge_panel"
+                ],
+                "competition_score": 55
+            }
+        },
+        {
+            "id": "serp_013",
+            "keyword": "crm software comparison",
+            "intent": "commercial",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": true,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "video_results"
+                ],
+                "competition_score": 50
+            }
+        },
+        {
+            "id": "serp_014",
+            "keyword": "dog grooming near me",
+            "intent": "local",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": false,
+                "local_pack": true,
+                "image_carousel": false,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "local_pack"
+                ],
+                "competition_score": 30
+            }
+        },
+        {
+            "id": "serp_015",
+            "keyword": "history of the roman empire",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": true,
+                "video_results": true,
+                "knowledge_panel": true,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "image_carousel",
+                    "video_results",
+                    "knowledge_panel"
+                ],
+                "competition_score": 80
+            }
+        },
+        {
+            "id": "serp_016",
+            "keyword": "obscure technical blog post topic xyz123",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": false,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [],
+                "competition_score": 0
+            }
+        },
+        {
+            "id": "serp_017",
+            "keyword": "samsung galaxy s25 review",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": true,
+                "video_results": true,
+                "knowledge_panel": false,
+                "shopping_ads": true,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "people_also_ask",
+                    "image_carousel",
+                    "video_results",
+                    "shopping_ads"
+                ],
+                "competition_score": 55
+            }
+        },
+        {
+            "id": "serp_018",
+            "keyword": "emergency dentist open now",
+            "intent": "local",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": false,
+                "local_pack": true,
+                "image_carousel": false,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "local_pack"
+                ],
+                "competition_score": 30
+            }
+        },
+        {
+            "id": "serp_019",
+            "keyword": "best project management software 2026",
+            "intent": "commercial",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": true,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "video_results"
+                ],
+                "competition_score": 50
+            }
+        },
+        {
+            "id": "serp_020",
+            "keyword": "climate change causes",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": true,
+                "video_results": true,
+                "knowledge_panel": true,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "image_carousel",
+                    "video_results",
+                    "knowledge_panel"
+                ],
+                "competition_score": 80
+            }
+        },
+        {
+            "id": "serp_021",
+            "keyword": "accountant near me",
+            "intent": "local",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": true,
+                "local_pack": true,
+                "image_carousel": false,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "people_also_ask",
+                    "local_pack"
+                ],
+                "competition_score": 40
+            }
+        },
+        {
+            "id": "serp_022",
+            "keyword": "how to invest in index funds",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": true,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "video_results"
+                ],
+                "competition_score": 50
+            }
+        },
+        {
+            "id": "serp_023",
+            "keyword": "nike air max 90",
+            "intent": "transactional",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": false,
+                "local_pack": false,
+                "image_carousel": true,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": true,
+                "sitelinks": true
+            },
+            "expected_output": {
+                "detected_features": [
+                    "image_carousel",
+                    "shopping_ads",
+                    "sitelinks"
+                ],
+                "competition_score": 40
+            }
+        },
+        {
+            "id": "serp_024",
+            "keyword": "yoga classes near me",
+            "intent": "local",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": true,
+                "local_pack": true,
+                "image_carousel": false,
+                "video_results": true,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "people_also_ask",
+                    "local_pack",
+                    "video_results"
+                ],
+                "competition_score": 55
+            }
+        },
+        {
+            "id": "serp_025",
+            "keyword": "what is machine learning",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": true,
+                "knowledge_panel": true,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "video_results",
+                    "knowledge_panel"
+                ],
+                "competition_score": 70
+            }
+        },
+        {
+            "id": "serp_026",
+            "keyword": "shopify pricing plans",
+            "intent": "commercial",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": true
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "sitelinks"
+                ],
+                "competition_score": 45
+            }
+        },
+        {
+            "id": "serp_027",
+            "keyword": "diy home renovation tips",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": true,
+                "video_results": true,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "people_also_ask",
+                    "image_carousel",
+                    "video_results"
+                ],
+                "competition_score": 35
+            }
+        },
+        {
+            "id": "serp_028",
+            "keyword": "electric car tax credit 2026",
+            "intent": "informational",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": false,
+                "image_carousel": false,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": false,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask"
+                ],
+                "competition_score": 35
+            }
+        },
+        {
+            "id": "serp_029",
+            "keyword": "hotel deals new york city",
+            "intent": "transactional",
+            "serp_features": {
+                "featured_snippet": false,
+                "people_also_ask": false,
+                "local_pack": true,
+                "image_carousel": true,
+                "video_results": false,
+                "knowledge_panel": false,
+                "shopping_ads": true,
+                "sitelinks": false
+            },
+            "expected_output": {
+                "detected_features": [
+                    "local_pack",
+                    "image_carousel",
+                    "shopping_ads"
+                ],
+                "competition_score": 60
+            }
+        },
+        {
+            "id": "serp_030",
+            "keyword": "all features present stress test",
+            "intent": "commercial",
+            "serp_features": {
+                "featured_snippet": true,
+                "people_also_ask": true,
+                "local_pack": true,
+                "image_carousel": true,
+                "video_results": true,
+                "knowledge_panel": true,
+                "shopping_ads": true,
+                "sitelinks": true
+            },
+            "expected_output": {
+                "detected_features": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "local_pack",
+                    "image_carousel",
+                    "video_results",
+                    "knowledge_panel",
+                    "shopping_ads",
+                    "sitelinks"
+                ],
+                "competition_score": 100
+            }
+        }
+    ]
+}
