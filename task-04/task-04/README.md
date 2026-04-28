@@ -74,8 +74,6 @@ G = d·M + (1 − d)·(1/N)·𝟙𝟙ᵀ
 
 By the **Perron–Frobenius theorem**, this eigenvector is unique and positive, corresponding to eigenvalue λ = 1. All other eigenvalues satisfy |λᵢ| ≤ d = 0.85, so power iteration damps them out — this is why convergence is guaranteed and fast (~10 iterations).
 
-**PCA connection:** If you ran PCA on the Google matrix, the first principal component would align exactly with the PageRank vector — it is the single axis of maximum variance in the link structure.
-
 **Implementation:** We avoid building the full N×N matrix. Instead, each iteration walks the sparse adjacency maps:
 - Dangling nodes (zero outbound) have their rank redistributed uniformly to maintain the row-stochastic invariant
 - Scores are normalised to sum to 1.0 after all iterations
