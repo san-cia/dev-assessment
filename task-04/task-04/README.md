@@ -104,12 +104,6 @@ The 60/40 split prioritises topical fit while still rewarding authority — a de
 
 ---
 
-## Dataset Note — Inbound Hint Discrepancy
-
-The `inbound_links_hint` in the dataset is intentionally inconsistent with the `pages` array for some entries (e.g. `/blog/international-seo` shows hint=1 but no page in the dataset links to it). Per the task instructions: *"Build inbound counts from the pages array above."* Our algorithm correctly uses the `pages` array as the source of truth, not the hint. The hint was used to verify our graph construction for the subset where it IS consistent.
-
----
-
 ## Results on Provided Dataset (42 pages)
 
 | Metric | Value |
@@ -125,7 +119,7 @@ The `inbound_links_hint` in the dataset is intentionally inconsistent with the `
 
 ## Scalability at 500,000+ Pages
 
-At 500k+ pages the current in-memory approach becomes impractical. Here's how the approach would change:
+At 500k+ pages the current in-memory approach becomes impractical. Here's how our approach would change:
 
 ### Memory
 - Replace `Map<string, Set<string>>` with a **compressed sparse row (CSR)** representation — integer node IDs and typed arrays for edges. A 500k-node, 5M-edge graph fits in ~80 MB instead of ~600 MB.
