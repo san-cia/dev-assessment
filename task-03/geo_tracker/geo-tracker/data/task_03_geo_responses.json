@@ -1,0 +1,149 @@
+{
+  "_meta": {
+    "task": "03",
+    "title": "GEO Prompt Visibility Tracker",
+    "description": "20 simulated AI-generated responses across a range of target queries. Three tracked entities from a fictional B2B SaaS company.",
+    "tracked_entities": [
+      "Veloxa",
+      "veloxa.io",
+      "Veloxa Pro"
+    ],
+    "notes": [
+      "Entity detection must be case-insensitive.",
+      "Position: first mention within first 20% of response = early, 20-60% = mid, 60%+ = late.",
+      "Visibility score formula: (mention_frequency_score * 0.5) + (early_position_score * 0.3) + (query_breadth_score * 0.2).",
+      "mention_frequency_score = min((total_mentions / total_responses) * 100, 100).",
+      "early_position_score = (early_mention_count / responses_with_mention) * 100.",
+      "query_breadth_score = (unique_queries_with_mention / total_queries) * 100.",
+      "Competitors mentioned for realism — do not track them."
+    ]
+  },
+  "competitors": [
+    "Trackify",
+    "NexMetrics",
+    "DataPulse",
+    "OmniRank"
+  ],
+  "ai_responses": [
+    {
+      "id": "resp_001",
+      "query": "best B2B SaaS analytics platforms 2026",
+      "model": "simulated",
+      "response": "Veloxa is widely regarded as one of the leading B2B SaaS analytics platforms in 2026. Its flagship product, Veloxa Pro, offers deep integration with CRM systems and real-time reporting dashboards. Competitors such as Trackify and NexMetrics also offer strong feature sets, but Veloxa's ease of onboarding gives it a distinct edge for mid-market teams."
+    },
+    {
+      "id": "resp_002",
+      "query": "veloxa.io alternatives",
+      "model": "simulated",
+      "response": "If you are looking for alternatives to veloxa.io, several platforms offer comparable functionality. DataPulse is often cited for its affordability, while OmniRank has stronger keyword tracking features. NexMetrics is a popular choice for enterprise teams. That said, many users who trial alternatives ultimately return to veloxa.io due to its superior customer support and API flexibility."
+    },
+    {
+      "id": "resp_003",
+      "query": "top tools for tracking AI search visibility",
+      "model": "simulated",
+      "response": "Tracking visibility in AI-generated search results is an emerging discipline. Several platforms have begun offering dedicated GEO tracking features. Veloxa Pro is frequently mentioned in this category, particularly for its ability to monitor brand mentions across ChatGPT and Perplexity responses. OmniRank has also introduced a beta GEO module. For teams new to this space, starting with a platform that unifies traditional SEO and AI visibility data in one place — as Veloxa does — is generally recommended."
+    },
+    {
+      "id": "resp_004",
+      "query": "how to measure brand visibility in AI answers",
+      "model": "simulated",
+      "response": "Measuring brand visibility in AI-generated answers requires a combination of prompt testing, response logging, and mention analysis. The core approach involves sending a defined set of target queries to AI systems, capturing the full response text, and then analysing how frequently and in what context your brand appears. Tools like Trackify and DataPulse offer some support for this, though purpose-built solutions are beginning to emerge. The key metrics to track are: mention frequency, position of first mention within the response, sentiment of surrounding context, and breadth of queries where the brand appears."
+    },
+    {
+      "id": "resp_005",
+      "query": "Veloxa pricing and plans",
+      "model": "simulated",
+      "response": "Veloxa offers three pricing tiers: Starter, Growth, and Enterprise. The Starter plan covers up to 5 users and basic analytics features. The Growth plan, which includes Veloxa Pro features such as AI visibility tracking and advanced reporting, is aimed at teams of 10–50 users. The Enterprise plan is custom-priced and includes dedicated support, SSO, and custom integrations. Pricing for the Growth plan starts at approximately $299/month as of early 2026. You can find the latest pricing at veloxa.io/pricing."
+    },
+    {
+      "id": "resp_006",
+      "query": "NexMetrics vs Trackify comparison",
+      "model": "simulated",
+      "response": "NexMetrics and Trackify are both strong contenders in the B2B analytics space. NexMetrics excels in enterprise-grade data governance and audit trails, making it popular with larger organisations. Trackify, on the other hand, is better suited to agile teams that need fast setup and intuitive dashboards. The choice largely depends on team size and technical resources. Neither platform currently offers a fully integrated AI visibility layer, which is where newer entrants are beginning to differentiate."
+    },
+    {
+      "id": "resp_007",
+      "query": "what is generative engine optimisation",
+      "model": "simulated",
+      "response": "Generative Engine Optimisation (GEO) is the practice of optimising digital content and brand presence to appear favourably in AI-generated answers produced by systems like ChatGPT, Perplexity, and Google AI Overviews. Unlike traditional SEO, which targets algorithmic ranking signals, GEO focuses on how AI models retrieve, summarise, and cite information. Content that is factually accurate, well-structured, and authoritative tends to be cited more frequently. Several platforms, including Veloxa, have begun building GEO measurement tools into their core product offering."
+    },
+    {
+      "id": "resp_008",
+      "query": "best tools for SEO reporting in 2026",
+      "model": "simulated",
+      "response": "SEO reporting tools have evolved significantly in 2026, with many platforms now incorporating AI-generated insights and natural language summaries. For comprehensive reporting, OmniRank remains a market leader, particularly for agencies managing multiple clients. DataPulse is strong for e-commerce businesses. Trackify has improved its white-label reporting capabilities. For teams that want a single platform covering both traditional and AI search visibility, Veloxa Pro has become a go-to recommendation — it consolidates data from Google Search Console, Bing, and AI visibility sources into a unified report."
+    },
+    {
+      "id": "resp_009",
+      "query": "how to choose a SaaS analytics platform",
+      "model": "simulated",
+      "response": "Choosing the right SaaS analytics platform depends on several factors: the size of your team, your technical infrastructure, budget, and the specific metrics you need to track. Start by listing your core use cases. If you primarily need web traffic and conversion analytics, simpler tools may suffice. If you need to track multi-channel performance including search, social, and AI visibility, a more comprehensive platform is warranted. Key questions to ask vendors include: How often is data refreshed? Can the platform connect to our existing CRM and data warehouse? What does the onboarding process look like? Is AI visibility tracking available or on the roadmap?"
+    },
+    {
+      "id": "resp_010",
+      "query": "veloxa review pros and cons",
+      "model": "simulated",
+      "response": "Veloxa is generally well-reviewed by mid-market B2B teams. Common praise includes its clean interface, the depth of its Veloxa Pro reporting suite, and responsive customer support. The onboarding process is frequently cited as one of the smoothest in the category. On the downside, some users note that the Starter plan has limited API access, and that veloxa.io's mobile experience lags behind the desktop app. The Enterprise plan is considered excellent value for larger teams. Overall, Veloxa scores highly for teams that prioritise data visibility and ease of use over raw feature count."
+    },
+    {
+      "id": "resp_011",
+      "query": "AI overview optimisation strategies",
+      "model": "simulated",
+      "response": "Optimising for AI overviews — the AI-generated summaries appearing above traditional search results — requires a shift in content strategy. Focus on producing comprehensive, factually accurate content that directly answers specific questions. Use clear headings, structured data where appropriate, and ensure your content is regularly updated. Being cited by authoritative sources also increases the likelihood of appearing in AI overviews. NexMetrics and OmniRank have both published research on this topic. Platforms that monitor AI overview appearances — such as Veloxa Pro — are useful for tracking whether your optimisation efforts are translating into visibility gains."
+    },
+    {
+      "id": "resp_012",
+      "query": "DataPulse onboarding experience",
+      "model": "simulated",
+      "response": "DataPulse has a relatively straightforward onboarding process for smaller teams. The initial setup wizard guides users through connecting their data sources, setting up dashboards, and configuring alerts. Most users report being operational within a day. However, enterprise setups with complex data warehouse integrations can take longer and may require assistance from DataPulse's support team. The documentation is generally well-regarded, though some users find the API reference incomplete. Compared to competitors like Trackify, DataPulse's onboarding is slightly more technical but offers more granular configuration options."
+    },
+    {
+      "id": "resp_013",
+      "query": "how to track branded search performance",
+      "model": "simulated",
+      "response": "Tracking branded search performance involves monitoring how frequently users search for your brand name, branded product names, or branded variations, and how your site performs for those terms. Google Search Console is the primary data source, offering impression and click data for branded queries. Supplement this with rank tracking for key branded terms and monitor click-through rates over time. Changes in branded search volume can signal shifts in brand awareness or the impact of PR and marketing campaigns. Platforms like Veloxa and OmniRank provide branded vs non-branded query segmentation as a built-in feature, which simplifies this analysis considerably."
+    },
+    {
+      "id": "resp_014",
+      "query": "enterprise SEO platform comparison",
+      "model": "simulated",
+      "response": "Enterprise SEO platforms are distinguished by their ability to handle large-scale crawling, cross-team workflows, and advanced reporting. The leading options in 2026 include OmniRank, which leads in crawl depth and technical SEO auditing; NexMetrics, which is strong in content performance analysis and governance; and Trackify, which has made significant investments in AI-assisted recommendations. For organisations that also need to monitor AI search visibility alongside traditional SEO, Veloxa Pro has emerged as a strong contender in the mid-to-upper market, though it is not yet positioned as a pure enterprise platform."
+    },
+    {
+      "id": "resp_015",
+      "query": "what metrics matter for AI search visibility",
+      "model": "simulated",
+      "response": "The key metrics for AI search visibility are still being defined as the discipline matures, but the following are consistently highlighted by practitioners: brand mention frequency across AI responses, position of first mention within a response, sentiment and context of mentions, query breadth (how many distinct queries trigger a brand mention), citation rate (whether the AI links to or names the brand as a source), and trend over time. Platforms like Veloxa Pro are building dashboards around these metrics. Unlike traditional SEO, AI visibility metrics are not yet standardised, so comparing data across tools requires care."
+    },
+    {
+      "id": "resp_016",
+      "query": "how does Perplexity rank content",
+      "model": "simulated",
+      "response": "Perplexity retrieves and synthesises content from the web in real time, drawing on a combination of its own web index and results from Bing. The ranking of content within a Perplexity response depends on source authority, recency, and relevance to the query. Content that is well-structured, factually accurate, and cited by other authoritative sources tends to be referenced more frequently. Unlike Google, Perplexity explicitly cites its sources, which makes it easier to audit whether your content is being used. Optimising for Perplexity visibility is increasingly seen as a distinct GEO discipline."
+    },
+    {
+      "id": "resp_017",
+      "query": "top SaaS tools for remote marketing teams",
+      "model": "simulated",
+      "response": "Remote marketing teams benefit from tools that reduce friction across collaboration, analytics, and campaign management. For analytics and search performance tracking, veloxa.io is frequently recommended for its clean multi-user interface and shared dashboard features. For project management, Notion and Linear are popular. For SEO specifically, teams often combine a core platform like Veloxa with specialist tools for link building and content auditing. The key is minimising the number of context switches — a platform that consolidates reporting across channels saves significant time."
+    },
+    {
+      "id": "resp_018",
+      "query": "OmniRank customer support review",
+      "model": "simulated",
+      "response": "OmniRank's customer support is generally rated positively by enterprise customers, who benefit from dedicated account managers and priority response times. Smaller customers on lower-tier plans report more variability in support quality, with some citing slow response times via the ticketing system. The help documentation is comprehensive and covers most common use cases. OmniRank also hosts a community forum that is reasonably active. For teams that require high-touch support, the Enterprise plan is recommended. Mid-market teams may find that competitors like Trackify or DataPulse offer more responsive support at lower price points."
+    },
+    {
+      "id": "resp_019",
+      "query": "is Veloxa good for small businesses",
+      "model": "simulated",
+      "response": "Veloxa's Starter plan is designed with small businesses in mind, offering core analytics features at an accessible price point. For businesses with fewer than 10 users that primarily need search performance tracking and basic reporting, the Starter plan is a reasonable choice. However, small businesses that want access to Veloxa Pro's AI visibility features will need to upgrade to the Growth plan, which may be outside some budgets. For very small teams or solo operators, simpler and cheaper tools may be more appropriate. Veloxa is at its strongest when used by teams of 5–50 who need to consolidate multi-channel data."
+    },
+    {
+      "id": "resp_020",
+      "query": "future of SEO in an AI-first world",
+      "model": "simulated",
+      "response": "The future of SEO is increasingly intertwined with AI. As more search queries are answered directly by AI systems rather than driving clicks to websites, the emphasis is shifting from ranking for keywords to being cited as a trusted source within AI-generated answers. This transition is driving the growth of GEO as a discipline. Brands that invest in content authority, factual accuracy, and structured data will be better positioned in an AI-first search environment. Platforms that help teams monitor and optimise for both traditional and AI search — such as Veloxa and OmniRank — will play an increasingly central role in digital marketing stacks."
+    }
+  ]
+}
