@@ -73,12 +73,11 @@ This is equivalent to finding the **dominant eigenvector** of the Google matrix:
 ```
 G = d·M + (1 − d)·(1/N)·𝟙𝟙ᵀ
 ```
+By the Perron–Frobenius theorem, the steady-state eigenvector is unique and strictly positive, with eigenvalue λ = 1. The remaining eigenvalues satisfy |λᵢ| ≤ d = 0.85, so their impact diminishes with each iteration. This is why power iteration converges reliably and typically within ~10 iterations.
 
-By the **Perron–Frobenius theorem**, this eigenvector is unique and positive, corresponding to eigenvalue λ = 1. All other eigenvalues satisfy |λᵢ| ≤ d = 0.85, so power iteration damps them out — this is why convergence is guaranteed and fast (~10 iterations).
-
-**Implementation:** We avoid building the full N×N matrix. Instead, each iteration walks the sparse adjacency maps:
-- Dangling nodes (zero outbound) have their rank redistributed uniformly to maintain the row-stochastic invariant
-- Scores are normalised to sum to 1.0 after all iterations
+Implementation: Instead of constructing the full N×N matrix, I operate directly on sparse adjacency maps in each iteration.
+- Dangling nodes (with no outgoing links) have their rank redistributed uniformly to maintain stochasticity
+- After each iteration, scores are normalized so they sum to 1.0
 
 ### Orphan & Near-Orphan Detection (`orphanDetector.js`)
 
@@ -121,24 +120,27 @@ The 60/40 split prioritises topical fit while still rewarding authority — a de
 
 ## Scalability at 500,000+ Pages
 
-At 500k+ pages the current in-memory approach becomes impractical. Here's how our approach would change:
+Once you get to ~500k pages, the current in-memory approach starts to break down. Here’s how I’d tweak my approach:
 
 ### Memory
-- Replace `Map<string, Set<string>>` with a **compressed sparse row (CSR)** representation — integer node IDs and typed arrays for edges. A 500k-node, 5M-edge graph fits in ~80 MB instead of ~600 MB.
-- Stream the crawl JSON rather than loading it entirely (use `stream/consumers` or a SAX-style parser).
+- Swap out `Map<string, Set<string>>` for a **compressed sparse row (CSR)** structure using integer node IDs and typed arrays. That brings memory down from ~600 MB to ~80 MB for a 500k-node, 5M-edge graph.
+- Stream the crawl data instead of loading the whole JSON at once.
 
-### PageRank computation
-- Use **blocked power iteration** — process nodes in chunks that fit in L3 cache to minimise cache misses.
-- For very large graphs, switch to **Apache Spark GraphX** or **NetworkX** with distributed execution, or a dedicated graph DB (Neo4j) with built-in PageRank.
-- The power iteration is already parallelisable: the rank update for each node is independent given the previous iteration's scores, so it maps naturally to worker threads or WASM SIMD.
+### PageRank Computation
+- Use **blocked power iteration** — process nodes in chunks that fit in cache to reduce cache misses.
+- For larger graphs, move to something like **Spark GraphX**, or a graph database (e.g., Neo4j) with built-in PageRank.
+- The algorithm is naturally parallel: each node’s update only depends on the previous iteration, so it can be split across worker threads or SIMD.
 
-### Orphan detection
-- Maintain a real-time inbound-count index during crawling rather than computing it post-hoc — every crawled link updates a counter, making orphan detection O(1) per page lookup.
+### Orphan Detection
+- Track inbound link counts during crawling itself instead of computing them later. Each link just increments a counter, making orphan detection essentially O(1).
 
-### Relevance matching
-- At scale, Jaccard on URL tokens becomes a bottleneck for the O(N) candidate scan per weak page.
-- Replace with **MinHash LSH** (Locality-Sensitive Hashing) to find approximate nearest neighbours in O(1) average case.
-- Alternatively, embed page URLs + metadata with a lightweight embedding model and use ANN search (FAISS, Pinecone).
+### Relevance Matching
+- Jaccard similarity on URL tokens doesn’t scale well since it requires scanning all candidates.
+- Replace it with **MinHash + LSH** for approximate nearest neighbours in near O(1).
+- Alternatively, generate embeddings for URLs/metadata and use ANN search (FAISS, Pinecone).
+
+### Storage
+- Store results in something like **ClickHouse** or **BigQuery** to track PageRank changes and orphan trends over time.
 
 ### Storage
 - Results go into a time-series database (ClickHouse / BigQuery) so historical PageRank trends and orphan regressions can be tracked across crawls.
