@@ -1,4 +1,5 @@
 # SERP Feature Extraction & Structured Scoring
+Author: Joyel
 
 A TypeScript utility that analyzes **Google SERP (Search Engine Results Page) features** for a given keyword and returns a **competition score** (0–100). The higher the score, the harder it is to earn organic clicks from Google.
 

@@ -1,5 +1,5 @@
 # Internal Link Graph Builder & Orphan Page Detector
-
+Author: Sancia 
 ## Overview
 
 A Node.js module that:

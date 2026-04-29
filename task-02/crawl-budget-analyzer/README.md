@@ -1,5 +1,5 @@
 # Crawl Budget Analyser & Wasted Crawl Detector
-
+Author: Simirna
 ## Overview
 Search engines allocate a limited crawl budget for each website. If bots spend time crawling low-value or problematic URLs, important pages may not be discovered or updated efficiently.
 This module analyzes Googlebot server logs and identifies patterns that waste crawl budget. The output is a structured report listing detected issues, affected URLs, frequency of wasted crawls, and a severity level.
