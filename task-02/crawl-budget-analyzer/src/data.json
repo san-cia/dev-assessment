@@ -1,0 +1,830 @@
+{
+  "_meta": {
+    "task": "02",
+    "title": "Crawl Budget Analyser & Wasted Crawl Detector",
+    "description": "7 days of simulated server access log entries (Googlebot + other bots + real users). 300 entries total.",
+    "disallowed_paths": [
+      "/private/",
+      "/admin/",
+      "/checkout/",
+      "/internal/"
+    ],
+    "pagination_pattern": "/page/",
+    "pagination_depth_threshold": 3,
+    "repeated_4xx_threshold": 1,
+    "notes": [
+      "Filter to Googlebot only before analysis.",
+      "Parameter duplication: same path, different query string combinations.",
+      "Pagination waste: /page/N where N > 3.",
+      "Repeated 4xx: same URL with 404 or 410 crawled more than once.",
+      "Robots blocked: any path starting with a disallowed_path prefix that Googlebot visited."
+    ]
+  },
+  "googlebot_user_agents": [
+    "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+    "Googlebot/2.1 (+http://www.google.com/bot.html)",
+    "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/120.0.0.0 Safari/537.36"
+  ],
+  "log_entries": [
+    {
+      "id": 1,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/",
+      "query": "",
+      "status": 200,
+      "bytes": 48200,
+      "ts": "2026-04-01T08:01:00Z"
+    },
+    {
+      "id": 2,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/about",
+      "query": "",
+      "status": 200,
+      "bytes": 22100,
+      "ts": "2026-04-01T08:04:00Z"
+    },
+    {
+      "id": 3,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog",
+      "query": "",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-01T08:07:00Z"
+    },
+    {
+      "id": 4,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/seo-guide-2026",
+      "query": "",
+      "status": 200,
+      "bytes": 54200,
+      "ts": "2026-04-01T08:10:00Z"
+    },
+    {
+      "id": 5,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/products",
+      "query": "",
+      "status": 200,
+      "bytes": 38900,
+      "ts": "2026-04-01T08:13:00Z"
+    },
+    {
+      "id": 6,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/products/plan-starter",
+      "query": "",
+      "status": 200,
+      "bytes": 27800,
+      "ts": "2026-04-01T08:16:00Z"
+    },
+    {
+      "id": 7,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/products/plan-pro",
+      "query": "",
+      "status": 200,
+      "bytes": 29100,
+      "ts": "2026-04-01T08:19:00Z"
+    },
+    {
+      "id": 8,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/products/plan-enterprise",
+      "query": "",
+      "status": 200,
+      "bytes": 31200,
+      "ts": "2026-04-01T08:22:00Z"
+    },
+    {
+      "id": 9,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/contact",
+      "query": "",
+      "status": 200,
+      "bytes": 18400,
+      "ts": "2026-04-01T08:25:00Z"
+    },
+    {
+      "id": 10,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/technical-seo-checklist",
+      "query": "",
+      "status": 200,
+      "bytes": 61200,
+      "ts": "2026-04-01T08:28:00Z"
+    },
+    {
+      "id": 11,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/link-building-guide",
+      "query": "",
+      "status": 200,
+      "bytes": 57800,
+      "ts": "2026-04-01T08:31:00Z"
+    },
+    {
+      "id": 12,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/case-studies",
+      "query": "",
+      "status": 200,
+      "bytes": 34200,
+      "ts": "2026-04-01T08:34:00Z"
+    },
+    {
+      "id": 13,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/case-studies/acme-corp",
+      "query": "",
+      "status": 200,
+      "bytes": 42100,
+      "ts": "2026-04-01T08:37:00Z"
+    },
+    {
+      "id": 14,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/products",
+      "query": "?sort=price_asc",
+      "status": 200,
+      "bytes": 38900,
+      "ts": "2026-04-01T09:00:00Z"
+    },
+    {
+      "id": 15,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/products",
+      "query": "?sort=price_desc",
+      "status": 200,
+      "bytes": 38900,
+      "ts": "2026-04-01T09:05:00Z"
+    },
+    {
+      "id": 16,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/products",
+      "query": "?sort=name_asc",
+      "status": 200,
+      "bytes": 38900,
+      "ts": "2026-04-01T09:10:00Z"
+    },
+    {
+      "id": 17,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/products",
+      "query": "?sort=name_desc&filter=active",
+      "status": 200,
+      "bytes": 38900,
+      "ts": "2026-04-01T09:15:00Z"
+    },
+    {
+      "id": 18,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/products",
+      "query": "?filter=active",
+      "status": 200,
+      "bytes": 38900,
+      "ts": "2026-04-01T09:20:00Z"
+    },
+    {
+      "id": 19,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog",
+      "query": "?category=seo&tag=technical",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-01T09:25:00Z"
+    },
+    {
+      "id": 20,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog",
+      "query": "?category=seo",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-01T09:30:00Z"
+    },
+    {
+      "id": 21,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog",
+      "query": "?tag=technical",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-01T09:35:00Z"
+    },
+    {
+      "id": 22,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog",
+      "query": "?category=geo",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-01T09:40:00Z"
+    },
+    {
+      "id": 23,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/case-studies",
+      "query": "?industry=ecommerce",
+      "status": 200,
+      "bytes": 34200,
+      "ts": "2026-04-01T09:45:00Z"
+    },
+    {
+      "id": 24,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/case-studies",
+      "query": "?industry=saas",
+      "status": 200,
+      "bytes": 34200,
+      "ts": "2026-04-01T09:50:00Z"
+    },
+    {
+      "id": 25,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/case-studies",
+      "query": "?industry=saas&size=enterprise",
+      "status": 200,
+      "bytes": 34200,
+      "ts": "2026-04-01T09:55:00Z"
+    },
+    {
+      "id": 26,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/1",
+      "query": "",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-02T08:00:00Z"
+    },
+    {
+      "id": 27,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/2",
+      "query": "",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-02T08:05:00Z"
+    },
+    {
+      "id": 28,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/3",
+      "query": "",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-02T08:10:00Z"
+    },
+    {
+      "id": 29,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/4",
+      "query": "",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-02T08:15:00Z"
+    },
+    {
+      "id": 30,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/5",
+      "query": "",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-02T08:20:00Z"
+    },
+    {
+      "id": 31,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/6",
+      "query": "",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-02T08:25:00Z"
+    },
+    {
+      "id": 32,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/7",
+      "query": "",
+      "status": 200,
+      "bytes": 28100,
+      "ts": "2026-04-02T08:30:00Z"
+    },
+    {
+      "id": 33,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/8",
+      "query": "",
+      "status": 200,
+      "bytes": 24300,
+      "ts": "2026-04-02T08:35:00Z"
+    },
+    {
+      "id": 34,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/9",
+      "query": "",
+      "status": 200,
+      "bytes": 19800,
+      "ts": "2026-04-02T08:40:00Z"
+    },
+    {
+      "id": 35,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/10",
+      "query": "",
+      "status": 200,
+      "bytes": 14200,
+      "ts": "2026-04-02T08:45:00Z"
+    },
+    {
+      "id": 36,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/11",
+      "query": "",
+      "status": 200,
+      "bytes": 11100,
+      "ts": "2026-04-02T08:50:00Z"
+    },
+    {
+      "id": 37,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/page/12",
+      "query": "",
+      "status": 200,
+      "bytes": 8900,
+      "ts": "2026-04-02T08:55:00Z"
+    },
+    {
+      "id": 38,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/case-studies/page/1",
+      "query": "",
+      "status": 200,
+      "bytes": 34200,
+      "ts": "2026-04-02T09:00:00Z"
+    },
+    {
+      "id": 39,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/case-studies/page/2",
+      "query": "",
+      "status": 200,
+      "bytes": 34200,
+      "ts": "2026-04-02T09:05:00Z"
+    },
+    {
+      "id": 40,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/case-studies/page/3",
+      "query": "",
+      "status": 200,
+      "bytes": 34200,
+      "ts": "2026-04-02T09:10:00Z"
+    },
+    {
+      "id": 41,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/case-studies/page/4",
+      "query": "",
+      "status": 200,
+      "bytes": 28100,
+      "ts": "2026-04-02T09:15:00Z"
+    },
+    {
+      "id": 42,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/case-studies/page/5",
+      "query": "",
+      "status": 200,
+      "bytes": 19200,
+      "ts": "2026-04-02T09:20:00Z"
+    },
+    {
+      "id": 43,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/old-pricing",
+      "query": "",
+      "status": 404,
+      "bytes": 1200,
+      "ts": "2026-04-02T10:00:00Z"
+    },
+    {
+      "id": 44,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/old-pricing",
+      "query": "",
+      "status": 404,
+      "bytes": 1200,
+      "ts": "2026-04-03T10:00:00Z"
+    },
+    {
+      "id": 45,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/old-pricing",
+      "query": "",
+      "status": 404,
+      "bytes": 1200,
+      "ts": "2026-04-04T10:00:00Z"
+    },
+    {
+      "id": 46,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/old-pricing",
+      "query": "",
+      "status": 404,
+      "bytes": 1200,
+      "ts": "2026-04-05T10:00:00Z"
+    },
+    {
+      "id": 47,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/deleted-post-2023",
+      "query": "",
+      "status": 410,
+      "bytes": 900,
+      "ts": "2026-04-02T11:00:00Z"
+    },
+    {
+      "id": 48,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/deleted-post-2023",
+      "query": "",
+      "status": 410,
+      "bytes": 900,
+      "ts": "2026-04-03T11:00:00Z"
+    },
+    {
+      "id": 49,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/deleted-post-2023",
+      "query": "",
+      "status": 410,
+      "bytes": 900,
+      "ts": "2026-04-04T11:00:00Z"
+    },
+    {
+      "id": 50,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/team/former-employee",
+      "query": "",
+      "status": 404,
+      "bytes": 1200,
+      "ts": "2026-04-03T14:00:00Z"
+    },
+    {
+      "id": 51,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/team/former-employee",
+      "query": "",
+      "status": 404,
+      "bytes": 1200,
+      "ts": "2026-04-05T14:00:00Z"
+    },
+    {
+      "id": 52,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/resources/whitepaper-2021",
+      "query": "",
+      "status": 404,
+      "bytes": 1200,
+      "ts": "2026-04-04T09:00:00Z"
+    },
+    {
+      "id": 53,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/resources/whitepaper-2021",
+      "query": "",
+      "status": 404,
+      "bytes": 1200,
+      "ts": "2026-04-06T09:00:00Z"
+    },
+    {
+      "id": 54,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/webinar/q1-2024",
+      "query": "",
+      "status": 404,
+      "bytes": 1200,
+      "ts": "2026-04-05T15:00:00Z"
+    },
+    {
+      "id": 55,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/admin/dashboard",
+      "query": "",
+      "status": 200,
+      "bytes": 14200,
+      "ts": "2026-04-03T08:00:00Z"
+    },
+    {
+      "id": 56,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/admin/users",
+      "query": "",
+      "status": 200,
+      "bytes": 9800,
+      "ts": "2026-04-03T08:05:00Z"
+    },
+    {
+      "id": 57,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/admin/settings",
+      "query": "",
+      "status": 200,
+      "bytes": 8100,
+      "ts": "2026-04-03T08:10:00Z"
+    },
+    {
+      "id": 58,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/private/internal-docs",
+      "query": "",
+      "status": 200,
+      "bytes": 22100,
+      "ts": "2026-04-03T09:00:00Z"
+    },
+    {
+      "id": 59,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/private/roadmap",
+      "query": "",
+      "status": 200,
+      "bytes": 18400,
+      "ts": "2026-04-03T09:05:00Z"
+    },
+    {
+      "id": 60,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/checkout/step-1",
+      "query": "",
+      "status": 200,
+      "bytes": 16200,
+      "ts": "2026-04-04T10:00:00Z"
+    },
+    {
+      "id": 61,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/checkout/step-2",
+      "query": "",
+      "status": 200,
+      "bytes": 14800,
+      "ts": "2026-04-04T10:05:00Z"
+    },
+    {
+      "id": 62,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/internal/api-docs",
+      "query": "",
+      "status": 200,
+      "bytes": 31200,
+      "ts": "2026-04-04T11:00:00Z"
+    },
+    {
+      "id": 63,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/internal/staging-notes",
+      "query": "",
+      "status": 200,
+      "bytes": 11400,
+      "ts": "2026-04-05T08:00:00Z"
+    },
+    {
+      "id": 64,
+      "ip": "192.168.1.10",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "path": "/products",
+      "query": "?sort=price_asc",
+      "status": 200,
+      "bytes": 38900,
+      "ts": "2026-04-01T10:00:00Z"
+    },
+    {
+      "id": 65,
+      "ip": "52.4.1.200",
+      "ua": "Bingbot/2.0 (+http://www.bing.com/bingbot.htm)",
+      "path": "/blog",
+      "query": "",
+      "status": 200,
+      "bytes": 31400,
+      "ts": "2026-04-01T11:00:00Z"
+    },
+    {
+      "id": 66,
+      "ip": "54.239.28.85",
+      "ua": "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)",
+      "path": "/blog/seo-guide-2026",
+      "query": "",
+      "status": 200,
+      "bytes": 54200,
+      "ts": "2026-04-02T12:00:00Z"
+    },
+    {
+      "id": 67,
+      "ip": "131.253.24.87",
+      "ua": "Mozilla/5.0 (compatible; MJ12bot/v1.4.8)",
+      "path": "/about",
+      "query": "",
+      "status": 200,
+      "bytes": 22100,
+      "ts": "2026-04-03T13:00:00Z"
+    },
+    {
+      "id": 68,
+      "ip": "40.77.167.10",
+      "ua": "Mozilla/5.0 (compatible; Discordbot/2.0)",
+      "path": "/",
+      "query": "",
+      "status": 200,
+      "bytes": 48200,
+      "ts": "2026-04-04T14:00:00Z"
+    },
+    {
+      "id": 69,
+      "ip": "203.0.113.5",
+      "ua": "curl/7.84.0",
+      "path": "/contact",
+      "query": "",
+      "status": 200,
+      "bytes": 18400,
+      "ts": "2026-04-05T09:00:00Z"
+    },
+    {
+      "id": 70,
+      "ip": "10.0.0.1",
+      "ua": "python-requests/2.28.0",
+      "path": "/admin/dashboard",
+      "query": "",
+      "status": 200,
+      "bytes": 14200,
+      "ts": "2026-04-05T10:00:00Z"
+    },
+    {
+      "id": 71,
+      "ip": "66.249.66.2",
+      "ua": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/120.0.0.0 Safari/537.36",
+      "path": "/blog/on-page-seo",
+      "query": "",
+      "status": 200,
+      "bytes": 49100,
+      "ts": "2026-04-05T08:00:00Z"
+    },
+    {
+      "id": 72,
+      "ip": "66.249.66.2",
+      "ua": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; +http://www.google.com/bot.html) Chrome/120.0.0.0 Safari/537.36",
+      "path": "/blog/geo-overview",
+      "query": "",
+      "status": 200,
+      "bytes": 52300,
+      "ts": "2026-04-05T08:10:00Z"
+    },
+    {
+      "id": 73,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/sitemap.xml",
+      "query": "",
+      "status": 200,
+      "bytes": 8200,
+      "ts": "2026-04-06T07:00:00Z"
+    },
+    {
+      "id": 74,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/robots.txt",
+      "query": "",
+      "status": 200,
+      "bytes": 480,
+      "ts": "2026-04-06T07:01:00Z"
+    },
+    {
+      "id": 75,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/core-web-vitals",
+      "query": "",
+      "status": 200,
+      "bytes": 58100,
+      "ts": "2026-04-06T08:00:00Z"
+    },
+    {
+      "id": 76,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/resources",
+      "query": "",
+      "status": 200,
+      "bytes": 24100,
+      "ts": "2026-04-06T08:10:00Z"
+    },
+    {
+      "id": 77,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/resources/seo-glossary",
+      "query": "",
+      "status": 200,
+      "bytes": 67400,
+      "ts": "2026-04-06T08:20:00Z"
+    },
+    {
+      "id": 78,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/pricing",
+      "query": "",
+      "status": 200,
+      "bytes": 29800,
+      "ts": "2026-04-07T08:00:00Z"
+    },
+    {
+      "id": 79,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/blog/ai-seo-trends",
+      "query": "",
+      "status": 200,
+      "bytes": 55900,
+      "ts": "2026-04-07T08:10:00Z"
+    },
+    {
+      "id": 80,
+      "ip": "66.249.66.1",
+      "ua": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "path": "/webinar/seo-2026",
+      "query": "",
+      "status": 200,
+      "bytes": 31200,
+      "ts": "2026-04-07T08:20:00Z"
+    }
+  ]
+}
