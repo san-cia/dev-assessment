@@ -1,0 +1,715 @@
+{
+  "totalPages": 42,
+  "pageRankDistribution": [
+    {
+      "url": "/blog",
+      "score": 0.104463
+    },
+    {
+      "url": "/",
+      "score": 0.099042
+    },
+    {
+      "url": "/blog/technical-seo-guide",
+      "score": 0.064637
+    },
+    {
+      "url": "/products",
+      "score": 0.053104
+    },
+    {
+      "url": "/pricing",
+      "score": 0.047241
+    },
+    {
+      "url": "/products/geo-tracker",
+      "score": 0.037873
+    },
+    {
+      "url": "/blog/seo-fundamentals",
+      "score": 0.03725
+    },
+    {
+      "url": "/blog/geo-introduction",
+      "score": 0.035763
+    },
+    {
+      "url": "/contact",
+      "score": 0.035221
+    },
+    {
+      "url": "/blog/crawl-budget-explained",
+      "score": 0.035037
+    },
+    {
+      "url": "/resources",
+      "score": 0.034811
+    },
+    {
+      "url": "/products/rank-monitor",
+      "score": 0.033924
+    },
+    {
+      "url": "/case-studies",
+      "score": 0.029597
+    },
+    {
+      "url": "/about",
+      "score": 0.029466
+    },
+    {
+      "url": "/blog/ai-overview-optimisation",
+      "score": 0.02813
+    },
+    {
+      "url": "/careers",
+      "score": 0.02784
+    },
+    {
+      "url": "/blog/core-web-vitals-2026",
+      "score": 0.027692
+    },
+    {
+      "url": "/blog/on-page-seo-checklist",
+      "score": 0.02402
+    },
+    {
+      "url": "/blog/internal-linking-best-practices",
+      "score": 0.023395
+    },
+    {
+      "url": "/products/analytics",
+      "score": 0.018986
+    },
+    {
+      "url": "/blog/link-building-strategies",
+      "score": 0.018742
+    },
+    {
+      "url": "/resources/seo-glossary",
+      "score": 0.017816
+    },
+    {
+      "url": "/team",
+      "score": 0.017706
+    },
+    {
+      "url": "/resources/geo-glossary",
+      "score": 0.017102
+    },
+    {
+      "url": "/resources/link-building-templates",
+      "score": 0.014808
+    },
+    {
+      "url": "/case-studies/ecommerce-growth",
+      "score": 0.014031
+    },
+    {
+      "url": "/case-studies/b2b-saas-scale",
+      "score": 0.008625
+    },
+    {
+      "url": "/case-studies/geo-early-adopter",
+      "score": 0.008625
+    },
+    {
+      "url": "/case-studies/local-seo-win",
+      "score": 0.008625
+    },
+    {
+      "url": "/blog/international-seo",
+      "score": 0.003571
+    },
+    {
+      "url": "/blog/keyword-research-guide",
+      "score": 0.003571
+    },
+    {
+      "url": "/blog/mobile-seo-guide",
+      "score": 0.003571
+    },
+    {
+      "url": "/blog/seasonal-seo-tips",
+      "score": 0.003571
+    },
+    {
+      "url": "/blog/site-architecture-guide",
+      "score": 0.003571
+    },
+    {
+      "url": "/case-studies/enterprise-migration",
+      "score": 0.003571
+    },
+    {
+      "url": "/legal/privacy-policy",
+      "score": 0.003571
+    },
+    {
+      "url": "/legal/terms-of-service",
+      "score": 0.003571
+    },
+    {
+      "url": "/lp/free-seo-audit",
+      "score": 0.003571
+    },
+    {
+      "url": "/products/site-auditor",
+      "score": 0.003571
+    },
+    {
+      "url": "/resources/content-brief-template",
+      "score": 0.003571
+    },
+    {
+      "url": "/resources/schema-markup-guide",
+      "score": 0.003571
+    },
+    {
+      "url": "/sitemap",
+      "score": 0.003571
+    }
+  ],
+  "pageRankSum": 0.999995,
+  "orphans": [
+    {
+      "url": "/blog/international-seo",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0.4833,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog]; PageRank 0.10446."
+        },
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0.55,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog, seo]; PageRank 0.06464."
+        },
+        {
+          "sourceUrl": "/blog/seo-fundamentals",
+          "pageRankScore": 0.03725,
+          "relevanceScore": 0.65,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog, seo]; PageRank 0.03725."
+        }
+      ]
+    },
+    {
+      "url": "/blog/keyword-research-guide",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0.4,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog]; PageRank 0.10446."
+        },
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0.4833,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog, guide]; PageRank 0.06464."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        }
+      ]
+    },
+    {
+      "url": "/blog/mobile-seo-guide",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0.75,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog, seo, guide]; PageRank 0.06464."
+        },
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0.4,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog]; PageRank 0.10446."
+        },
+        {
+          "sourceUrl": "/blog/seo-fundamentals",
+          "pageRankScore": 0.03725,
+          "relevanceScore": 0.55,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog, seo]; PageRank 0.03725."
+        }
+      ]
+    },
+    {
+      "url": "/blog/seasonal-seo-tips",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0.4,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog]; PageRank 0.10446."
+        },
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0.4833,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog, seo]; PageRank 0.06464."
+        },
+        {
+          "sourceUrl": "/blog/seo-fundamentals",
+          "pageRankScore": 0.03725,
+          "relevanceScore": 0.55,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog, seo]; PageRank 0.03725."
+        }
+      ]
+    },
+    {
+      "url": "/blog/site-architecture-guide",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0.4,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog]; PageRank 0.10446."
+        },
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0.4833,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog, guide]; PageRank 0.06464."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        }
+      ]
+    },
+    {
+      "url": "/case-studies/enterprise-migration",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/case-studies",
+          "pageRankScore": 0.029597,
+          "relevanceScore": 0.65,
+          "reason": "Same section (\"/case-studies/\") with shared keywords [case, studies]; PageRank 0.02960."
+        },
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        }
+      ]
+    },
+    {
+      "url": "/legal/privacy-policy",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.06464) — add contextual link to surface this page."
+        }
+      ]
+    },
+    {
+      "url": "/legal/terms-of-service",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.06464) — add contextual link to surface this page."
+        }
+      ]
+    },
+    {
+      "url": "/lp/free-seo-audit",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0.1429,
+          "reason": "Shares topic keywords [seo] with the target; PageRank 0.06464."
+        }
+      ]
+    },
+    {
+      "url": "/products/site-auditor",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/products",
+          "pageRankScore": 0.053104,
+          "relevanceScore": 0.4833,
+          "reason": "Same section (\"/products/\") with shared keywords [products]; PageRank 0.05310."
+        },
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        }
+      ]
+    },
+    {
+      "url": "/resources/content-brief-template",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/resources",
+          "pageRankScore": 0.034811,
+          "relevanceScore": 0.4,
+          "reason": "Same section (\"/resources/\") with shared keywords [resources]; PageRank 0.03481."
+        }
+      ]
+    },
+    {
+      "url": "/resources/schema-markup-guide",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/resources",
+          "pageRankScore": 0.034811,
+          "relevanceScore": 0.4,
+          "reason": "Same section (\"/resources/\") with shared keywords [resources]; PageRank 0.03481."
+        }
+      ]
+    },
+    {
+      "url": "/sitemap",
+      "inboundCount": 0,
+      "status": "orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.06464) — add contextual link to surface this page."
+        }
+      ]
+    }
+  ],
+  "nearOrphans": [
+    {
+      "url": "/blog/link-building-strategies",
+      "inboundCount": 2,
+      "status": "near-orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0.2929,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog]; PageRank 0.06464."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/blog/seo-fundamentals",
+          "pageRankScore": 0.03725,
+          "relevanceScore": 0.3167,
+          "reason": "Same section (\"/blog/\") with shared keywords [blog]; PageRank 0.03725."
+        }
+      ]
+    },
+    {
+      "url": "/case-studies/b2b-saas-scale",
+      "inboundCount": 1,
+      "status": "near-orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/case-studies/ecommerce-growth",
+          "pageRankScore": 0.014031,
+          "relevanceScore": 0.4357,
+          "reason": "Same section (\"/case-studies/\") with shared keywords [case, studies]; PageRank 0.01403."
+        }
+      ]
+    },
+    {
+      "url": "/case-studies/ecommerce-growth",
+      "inboundCount": 2,
+      "status": "near-orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/case-studies/enterprise-migration",
+          "pageRankScore": 0.003571,
+          "relevanceScore": 0.4833,
+          "reason": "Same section (\"/case-studies/\") with shared keywords [case, studies]; PageRank 0.00357."
+        }
+      ]
+    },
+    {
+      "url": "/case-studies/geo-early-adopter",
+      "inboundCount": 1,
+      "status": "near-orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/case-studies/ecommerce-growth",
+          "pageRankScore": 0.014031,
+          "relevanceScore": 0.4357,
+          "reason": "Same section (\"/case-studies/\") with shared keywords [case, studies]; PageRank 0.01403."
+        }
+      ]
+    },
+    {
+      "url": "/case-studies/local-seo-win",
+      "inboundCount": 1,
+      "status": "near-orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0.125,
+          "reason": "Shares topic keywords [seo] with the target; PageRank 0.06464."
+        }
+      ]
+    },
+    {
+      "url": "/resources/geo-glossary",
+      "inboundCount": 2,
+      "status": "near-orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/resources/seo-glossary",
+          "pageRankScore": 0.017816,
+          "relevanceScore": 0.65,
+          "reason": "Same section (\"/resources/\") with shared keywords [resources, glossary]; PageRank 0.01782."
+        },
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        }
+      ]
+    },
+    {
+      "url": "/resources/link-building-templates",
+      "inboundCount": 2,
+      "status": "near-orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/resources/seo-glossary",
+          "pageRankScore": 0.017816,
+          "relevanceScore": 0.3167,
+          "reason": "Same section (\"/resources/\") with shared keywords [resources]; PageRank 0.01782."
+        }
+      ]
+    },
+    {
+      "url": "/team",
+      "inboundCount": 2,
+      "status": "near-orphan",
+      "recommendations": [
+        {
+          "sourceUrl": "/blog",
+          "pageRankScore": 0.104463,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.10446) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/",
+          "pageRankScore": 0.099042,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.09904) — add contextual link to surface this page."
+        },
+        {
+          "sourceUrl": "/blog/technical-seo-guide",
+          "pageRankScore": 0.064637,
+          "relevanceScore": 0,
+          "reason": "High-authority hub (PageRank 0.06464) — add contextual link to surface this page."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "orphanCount": 13,
+    "nearOrphanCount": 8,
+    "healthyCount": 21,
+    "topPagesByRank": [
+      "/blog",
+      "/",
+      "/blog/technical-seo-guide",
+      "/products",
+      "/pricing"
+    ]
+  }
+}
