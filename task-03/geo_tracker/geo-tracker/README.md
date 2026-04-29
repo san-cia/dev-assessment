@@ -1,5 +1,6 @@
 # GEO Prompt Visibility Tracker – Implementation Notes
 Author: Sylvia
+
 ✅ What I Implemented
 1. Entity Detection
 
