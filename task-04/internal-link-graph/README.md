@@ -34,6 +34,7 @@ npm test
 ```
 task-04/
 ├── src/
+│   ├── generateHtml.js      # Dashboard generator
 │   ├── graphBuilder.js      # Graph construction (nodes, inbound/outbound adjacency)
 │   ├── pageRank.js          # PageRank via power iteration (eigenvalue method)
 │   ├── orphanDetector.js    # Orphan detection, relevance scoring, recommendations
@@ -41,6 +42,7 @@ task-04/
 ├── tests/
 │   └── linkGraph.test.js    # 9 unit tests (Vitest)
 ├── output/
+│   ├── report.html          # Dashboard
 │   └── report.json          # Generated after npm start
 └── README.md
 ```
