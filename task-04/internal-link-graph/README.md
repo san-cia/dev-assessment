@@ -1,4 +1,4 @@
-# Task 04 — Internal Link Graph Builder & Orphan Page Detector
+# Internal Link Graph Builder & Orphan Page Detector
 
 ## Overview
 
